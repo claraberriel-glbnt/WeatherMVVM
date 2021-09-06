@@ -1,39 +1,45 @@
 package com.claraberriel.weathermvvm.viewmodel
 
-import android.content.ContentValues.TAG
+
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.claraberriel.weathermvvm.model.WeatherResponse
-import com.claraberriel.weathermvvm.repository.WeatherRepository
-import dagger.hilt.android.lifecycle.HiltViewModel
+import com.claraberriel.domain.entities.Weather
+import com.claraberriel.domain.usecases.GetWeatherUseCase
+import com.claraberriel.domain.utils.Result
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import javax.inject.Inject
+import kotlinx.coroutines.withContext
 
-@HiltViewModel
 class WeatherViewModel
-@Inject
-constructor(private val repository: WeatherRepository) : ViewModel() {
+constructor(private val getWeatherUseCase: GetWeatherUseCase) : ViewModel() {
 
-    private val _resp = MutableLiveData<WeatherResponse>()
-    val weatherResp:LiveData<WeatherResponse>
-    get() = _resp
+    private val _resp = MutableLiveData<List<Weather>>()
+    val oneCallResp: LiveData<List<Weather>>
+        get() = _resp
 
+    /*
     init {
         getWeather()
     }
 
-    private fun getWeather() = viewModelScope.launch {
-        repository.getWeather().let { response ->
+     */
 
-            if (response.isSuccessful){
-                _resp.postValue(response.body())
-            }else{
-                Log.d("Tag", "getWeather Error Response: ${response.message()}")
-            }
-
+    fun getWeather() = viewModelScope.launch {
+        val result = withContext(Dispatchers.IO) {
+            getWeatherUseCase()
         }
+
+        when (result) {
+            is Result.Success -> {
+                _resp.postValue(result.data)
+            }
+            is Result.Failure -> {
+                Log.e("Tag", "getWeather Error Response: ", result.exception)
+            }
+        }
+
     }
 }

@@ -1,2 +1,4 @@
 rootProject.name = "WeatherMVVM"
 include ':app'
+include ':data'
+include ':domain'
