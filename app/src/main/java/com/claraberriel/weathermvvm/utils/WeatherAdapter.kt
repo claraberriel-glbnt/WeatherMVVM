@@ -3,18 +3,26 @@ package com.claraberriel.weathermvvm.utils
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.claraberriel.data.utils.Constants
 import com.claraberriel.domain.entities.Weather
 import com.claraberriel.weathermvvm.databinding.RowBinding
+import java.text.SimpleDateFormat
+import java.util.*
 
-class WeatherAdapter(private val weatherList: List<Weather>): RecyclerView.Adapter<WeatherAdapter.WeatherViewHolder>() {
+class WeatherAdapter(private val weatherList: List<Weather>) :
+    RecyclerView.Adapter<WeatherAdapter.WeatherViewHolder>() {
 
     inner class WeatherViewHolder(private val binding: RowBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun holderBindingRun(holder: WeatherViewHolder, weatherItem: Weather) {
             holder.binding.run {
-                rowTitleDayTv.text = weatherItem.date.toString()
-                rowDescriptionTv.text = weatherItem.temp.toString()
-                //getIcon(holder, weatherItem.image, imgWeather)
+                rowTitleDayTv.text = convertToCelsius(weatherItem.temp)
+                rowDescriptionTv.text =
+                    SimpleDateFormat(Constants.DATE_FORMAT_PATTERN, Locale.getDefault()).format(
+                        Date(weatherItem.date * 1000)
+                    )
+                Glide.with(holder.itemView.context).load(weatherItem.icon).into(rowActionImage)
             }
         }
     }
@@ -31,5 +39,9 @@ class WeatherAdapter(private val weatherList: List<Weather>): RecyclerView.Adapt
 
     override fun getItemCount(): Int {
         return weatherList.size
+    }
+
+    private fun convertToCelsius(temp: Double): String {
+        return String.format(Constants.DECIMAL_SPACES, temp) + Constants.CELSIUS_IDENTIFIER
     }
 }

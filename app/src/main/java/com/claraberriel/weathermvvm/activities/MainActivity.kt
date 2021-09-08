@@ -39,7 +39,7 @@ class MainActivity : AppCompatActivity() {
         binding.recyclerview.adapter = adapter
     }
 
-    private fun updateUI(weatherData: Event<Data<Weather>>) {
+    private fun updateUI(weatherData: Event<Data<List<Weather>>>) {
         when (weatherData.peekContent().responseType) {
             Status.ERROR -> {
                 hideProgress()
@@ -52,7 +52,7 @@ class MainActivity : AppCompatActivity() {
             Status.SUCCESSFUL -> {
                 hideProgress()
                 weatherData.peekContent().data?.let {
-                    initRecycler(listOf(it))
+                    initRecycler(it)
                 }
             }
         }

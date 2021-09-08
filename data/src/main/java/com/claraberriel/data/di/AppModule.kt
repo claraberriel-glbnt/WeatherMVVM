@@ -10,7 +10,7 @@ object AppModule {
 
     fun provideBaseUrl() = Constants.BASE_URL
 
-    fun provideRetrofitInstance(BASE_URL:String): WeatherApi =
+    fun provideRetrofitInstance(BASE_URL: String): WeatherApi =
         Retrofit.Builder()
             .baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
