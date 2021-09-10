@@ -28,9 +28,22 @@ constructor(private val getWeatherUseCase: GetWeatherUseCase) : ViewModel() {
     }
 
     fun getWeather() = viewModelScope.launch {
+        _response.value = Event(Data(responseType = Status.LOADING))
         val result = withContext(Dispatchers.IO) {
             getWeatherUseCase()
         }
+
+        /*
+         when (val result = withContext(Dispatchers.IO) { getCharacterById(id, true) }) {
+            is Result.Failure -> {
+                mutableMainState.value = Event(Data(responseType = Status.ERROR, error = result.exception))
+            }
+            is Result.Success -> {
+                mutableMainState.value = Event(Data(responseType = Status.SUCCESSFUL, data = result.data))
+            }
+        }
+    }
+        */
 
         when (result) {
             is Result.Success -> {
@@ -44,7 +57,7 @@ constructor(private val getWeatherUseCase: GetWeatherUseCase) : ViewModel() {
                 )
             }
             is Result.Failure -> {
-                Log.e("Tag", "getWeather Error Response: ", result.exception)
+                _response.value = Event(Data(responseType = Status.ERROR, error = result.exception))
             }
         }
 
