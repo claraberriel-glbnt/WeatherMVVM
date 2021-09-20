@@ -54,7 +54,6 @@ class WeatherService(context: Context) {
                     mapper.transform(it)
                 }?.let {
                     return Result.Success(it)
-
                 }
             }
             return Result.Failure(Exception(response.message()))

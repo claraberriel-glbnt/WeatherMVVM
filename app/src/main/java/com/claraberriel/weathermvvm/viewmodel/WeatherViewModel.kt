@@ -14,26 +14,21 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class WeatherViewModel
-constructor(private val getWeatherUseCase: GetWeatherUseCase) : ViewModel() {
+class WeatherViewModel constructor(private val getWeatherUseCase: GetWeatherUseCase) : ViewModel() {
 
-    private val _response = MutableLiveData<Event<Data<List<Weather>>>>()
-    val oneCallResp: LiveData<Event<Data<List<Weather>>>>
-        get() = _response
-
-    init {
-        getWeather()
-    }
+    private val _weatherList = MutableLiveData<Event<Data<List<Weather>>>>()
+    val weatherList: LiveData<Event<Data<List<Weather>>>>
+        get() = _weatherList
 
     fun getWeather() = viewModelScope.launch {
-        _response.value = Event(Data(responseType = Status.LOADING))
+        _weatherList.value = Event(Data(responseType = Status.LOADING))
         val result = withContext(Dispatchers.IO) {
             getWeatherUseCase()
         }
 
         when (result) {
             is Result.Success -> {
-                _response.postValue(
+                _weatherList.postValue(
                     Event(
                         Data(
                             responseType = Status.SUCCESSFUL,
@@ -43,7 +38,7 @@ constructor(private val getWeatherUseCase: GetWeatherUseCase) : ViewModel() {
                 )
             }
             is Result.Failure -> {
-                _response.value = Event(Data(responseType = Status.ERROR, error = result.exception))
+                _weatherList.value = Event(Data(responseType = Status.ERROR, error = result.exception))
             }
         }
 

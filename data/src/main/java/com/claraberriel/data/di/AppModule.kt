@@ -5,7 +5,6 @@ import com.claraberriel.data.utils.Constants
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-
 object AppModule {
 
     fun provideBaseUrl() = Constants.BASE_URL

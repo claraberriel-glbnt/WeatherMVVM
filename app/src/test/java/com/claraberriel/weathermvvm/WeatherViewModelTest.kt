@@ -14,8 +14,12 @@ import kotlinx.coroutines.newSingleThreadContext
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.setMain
-import org.junit.*
+import org.junit.After
+import org.junit.Test
+import org.junit.Assert
 import org.junit.Assert.assertEquals
+import org.junit.Before
+import org.junit.Rule
 import org.mockito.Mock
 import org.mockito.MockitoAnnotations
 import org.mockito.kotlin.whenever
@@ -62,7 +66,7 @@ class WeatherViewModelTest {
 
     @Test
     fun getWeatherSuccess() {
-        val liveDataUnderTest = viewModel.oneCallResp.testObserver()
+        val liveDataUnderTest = viewModel.weatherList.testObserver()
         whenever(getWeatherUseCase.invoke()).thenReturn(weatherSuccessResult)
         whenever(weatherSuccessResult.data).thenReturn(weatherReport)
 
@@ -82,7 +86,7 @@ class WeatherViewModelTest {
 
     @Test
     fun getWeatherFailure() {
-        val liveDataUnderTest = viewModel.oneCallResp.testObserver()
+        val liveDataUnderTest = viewModel.weatherList.testObserver()
         whenever(getWeatherUseCase.invoke()).thenReturn(weatherFailureResult)
         whenever(weatherFailureResult.exception).thenReturn(exception)
 

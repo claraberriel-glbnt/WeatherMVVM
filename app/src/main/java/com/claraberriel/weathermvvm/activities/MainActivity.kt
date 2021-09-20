@@ -28,11 +28,11 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        viewModel.oneCallResp.observe(::getLifecycle, ::updateUI)
+        viewModel.weatherList.observe(::getLifecycle, ::updateUI)
         viewModel.getWeather()
     }
 
-    private fun initRecycler(weatherList: List<Weather>) {
+    private fun refreshList(weatherList: List<Weather>) {
         binding.recyclerview.setHasFixedSize(true)
         binding.recyclerview.layoutManager = LinearLayoutManager(this)
         val adapter = WeatherAdapter(weatherList)
@@ -52,7 +52,7 @@ class MainActivity : AppCompatActivity() {
             Status.SUCCESSFUL -> {
                 hideProgress()
                 weatherData.peekContent().data?.let {
-                    initRecycler(it)
+                    refreshList(it)
                 }
             }
         }

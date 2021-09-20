@@ -5,10 +5,12 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.claraberriel.data.utils.Constants
+import com.claraberriel.data.utils.Constants.CELSIUS_IDENTIFIER
 import com.claraberriel.domain.entities.Weather
 import com.claraberriel.weathermvvm.databinding.RowBinding
 import java.text.SimpleDateFormat
-import java.util.*
+import java.util.Locale
+import java.util.Date
 
 class WeatherAdapter(private val weatherList: List<Weather>) :
     RecyclerView.Adapter<WeatherAdapter.WeatherViewHolder>() {
@@ -42,6 +44,6 @@ class WeatherAdapter(private val weatherList: List<Weather>) :
     }
 
     private fun convertToCelsius(temp: Double): String {
-        return String.format(Constants.DECIMAL_SPACES, temp) + Constants.CELSIUS_IDENTIFIER
+        return String.format(Constants.DECIMAL_SPACES, temp, CELSIUS_IDENTIFIER)
     }
 }
