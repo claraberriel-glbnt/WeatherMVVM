@@ -1,0 +1,47 @@
+ext {
+    appcompat = "1.3.1"
+    coreKtx = "1.6.0"
+    material = "1.4.0"
+    constraintlayout = "2.1.0"
+    junit_version = "4.13.2"
+    espresso_core_version = "3.4.0"
+    cardview = "1.0.0"
+    recyclerview = "1.2.1"
+    recyclerview_selection = "1.1.0"
+    retrofit2 = "2.9.0"
+    retrofitComverterGson = "2.9.0"
+    okhttp3 = "4.9.0"
+    coroutinesCore = "1.5.1-native-mt"
+    coroutinesAndroid = "1.5.1-native-mt"
+    lifecycleViewmodel = "2.3.1"
+    lifecycleRuntime = "2.3.1"
+    activity_ktx = "1.3.1"
+    dagger_hilt = "2.38.1"
+    dagger_hiltcompiler = "2.38.1"
+    hiltlifecycle = "1.0.0-alpha03"
+    hilt_compiler = "1.0.0"
+
+    generalDependencies = [
+            appcompat             : "androidx.appcompat:appcompat:${appcompat}",
+            coreKtx               : "androidx.core:core-ktx:${coreKtx}",
+            material              : "androidx.core:core-ktx:${material}",
+            constraintlayout      : "androidx.constraintlayout:constraintlayout:${constraintlayout}",
+            junit_version         : "junit:junit:${junit_version}",
+            espresso_core_version : "androidx.test.espresso:espresso-core:${espresso_core_version}",
+            cardview              : "androidx.cardview:cardview:${cardview}",
+            recyclerview          : "androidx.recyclerview:recyclerview:${recyclerview}",
+            recyclerview_selection: "androidx.recyclerview:recyclerview-selection:${recyclerview_selection}",
+            retrofit2             : "com.squareup.retrofit2:retrofit:${retrofit2}",
+            retrofitComverterGson : "com.squareup.retrofit2:converter-gson:${retrofitComverterGson}",
+            okhttp3               : "com.squareup.okhttp3:okhttp:${okhttp3}",
+            coroutinesCore        : "org.jetbrains.kotlinx:kotlinx-coroutines-core:${coroutinesCore}",
+            coroutinesAndroid     : "org.jetbrains.kotlinx:kotlinx-coroutines-android:${coroutinesAndroid}",
+            lifecycleViewmodel    : "androidx.lifecycle:lifecycle-viewmodel-ktx:${lifecycleViewmodel}",
+            lifecycleRuntime      : "androidx.lifecycle:lifecycle-runtime-ktx:${lifecycleRuntime}",
+            activity_ktx          : "androidx.activity:activity-ktx:${activity_ktx}",
+            dagger_hilt           : "com.google.dagger:hilt-android:${dagger_hilt}",
+            dagger_hiltcompiler   : "com.google.dagger:hilt-android-compiler:${dagger_hiltcompiler}",
+            hiltlifecycle         : "androidx.hilt:hilt-lifecycle-viewmodel:${hiltlifecycle}",
+            hilt_compiler         : "androidx.hilt:hilt-compiler:${hilt_compiler}",
+    ]
+}
