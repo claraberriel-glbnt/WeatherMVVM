@@ -24,7 +24,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/row_title_day_tv"
+            android:id="@+id/row_temperature"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Title"
@@ -34,7 +34,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.131"
-            app:layout_constraintStart_toEndOf="@+id/row_action_image"
+            app:layout_constraintStart_toEndOf="@id/row_action_image"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.207" />
 
@@ -48,7 +48,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/row_action_image"
-            app:layout_constraintTop_toBottomOf="@id/row_title_day_tv" />
+            app:layout_constraintTop_toBottomOf="@id/row_temperature" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

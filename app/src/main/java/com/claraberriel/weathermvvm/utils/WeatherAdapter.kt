@@ -17,7 +17,7 @@ class WeatherAdapter(private val weatherList: List<Weather>) :
         RecyclerView.ViewHolder(binding.root) {
         fun holderBindingRun(holder: WeatherViewHolder, weatherItem: Weather) {
             holder.binding.run {
-                rowTitleDayTv.text = convertToCelsius(weatherItem.temp)
+                rowTemperature.text = convertToCelsius(weatherItem.temp)
                 rowDescriptionTv.text =
                     SimpleDateFormat(Constants.DATE_FORMAT_PATTERN, Locale.getDefault()).format(
                         Date(weatherItem.date * 1000)
@@ -27,7 +27,7 @@ class WeatherAdapter(private val weatherList: List<Weather>) :
         }
     }
 
-    override fun onCreateViewHolder(viewGroup: ViewGroup, i: Int): WeatherViewHolder {
+    override fun onCreateViewHolder(viewGroup: ViewGroup, number: Int): WeatherViewHolder {
         val binding = RowBinding.inflate(LayoutInflater.from(viewGroup.context), viewGroup, false)
         return WeatherViewHolder(binding)
     }

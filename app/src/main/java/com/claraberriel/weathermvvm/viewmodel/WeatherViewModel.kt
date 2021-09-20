@@ -1,7 +1,5 @@
 package com.claraberriel.weathermvvm.viewmodel
 
-
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -32,18 +30,6 @@ constructor(private val getWeatherUseCase: GetWeatherUseCase) : ViewModel() {
         val result = withContext(Dispatchers.IO) {
             getWeatherUseCase()
         }
-
-        /*
-         when (val result = withContext(Dispatchers.IO) { getCharacterById(id, true) }) {
-            is Result.Failure -> {
-                mutableMainState.value = Event(Data(responseType = Status.ERROR, error = result.exception))
-            }
-            is Result.Success -> {
-                mutableMainState.value = Event(Data(responseType = Status.SUCCESSFUL, data = result.data))
-            }
-        }
-    }
-        */
 
         when (result) {
             is Result.Success -> {
